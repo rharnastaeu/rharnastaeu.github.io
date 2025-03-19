@@ -171,4 +171,74 @@ window.addEventListener('load', () => {
     });
     
     console.log('All resources loaded');
+});
+
+/**
+ * Image loading error handler
+ * Falls back to the original image if optimized images aren't available
+ */
+function handleImageLoadErrors() {
+    const imageSources = document.querySelectorAll('source[srcset]');
+    
+    imageSources.forEach(source => {
+        const img = new Image();
+        img.onerror = () => {
+            // If the optimized image fails to load, remove this source element
+            // so the browser falls back to the next available source or the img element
+            source.remove();
+        };
+        img.src = source.srcset;
+    });
+}
+
+/**
+ * Initialize all components
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if sections exist to prevent errors
+    if (document.querySelector('.timeline')) {
+        try {
+            initExperience();
+        } catch (error) {
+            console.error('Error initializing experience section:', error);
+        }
+    }
+    
+    if (document.querySelector('.projects-grid')) {
+        try {
+            initProjects();
+        } catch (error) {
+            console.error('Error initializing projects section:', error);
+        }
+    }
+    
+    if (document.querySelector('.skills-container')) {
+        try {
+            initSkills();
+        } catch (error) {
+            console.error('Error initializing skills section:', error);
+        }
+    }
+    
+    if (document.querySelector('.contact')) {
+        try {
+            initContact();
+        } catch (error) {
+            console.error('Error initializing contact section:', error);
+        }
+    }
+    
+    // Handle profile image optimization
+    handleImageLoadErrors();
+    
+    // Theme switcher functionality
+    try {
+        initThemeSwitch();
+    } catch (error) {
+        console.error('Error initializing theme switcher:', error);
+    }
+    
+    // Mark document as fully loaded
+    document.body.classList.remove('loading');
+    document.body.classList.add('loaded');
 }); 

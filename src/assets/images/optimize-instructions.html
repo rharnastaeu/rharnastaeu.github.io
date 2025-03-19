@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Optimization Instructions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        .note {
+            background-color: #ffffd8;
+            padding: 10px;
+            border-left: 4px solid #ffcc00;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Optimization Instructions</h1>
+    
+    <p>To optimize your portfolio website's loading performance, you should create optimized versions of your profile image for different screen sizes.</p>
+    
+    <h2>Required Sizes:</h2>
+    <ul>
+        <li><strong>author-small.jpg</strong> - 200px × 200px (for mobile devices)</li>
+        <li><strong>author-medium.jpg</strong> - 240px × 240px (for tablets)</li>
+    </ul>
+    
+    <div class="note">
+        <p><strong>Note:</strong> The original high-quality image (author.JPG) will still be used for desktop views at 300px × 300px.</p>
+    </div>
+    
+    <h2>How to Optimize Images:</h2>
+    
+    <h3>Option 1: Using Online Tools</h3>
+    <ol>
+        <li>Go to a free image optimization tool like <a href="https://squoosh.app/" target="_blank">Squoosh.app</a> or <a href="https://tinypng.com/" target="_blank">TinyPNG</a></li>
+        <li>Upload your original image (author.JPG)</li>
+        <li>Resize it to the dimensions above</li>
+        <li>Compress it using the recommended settings</li>
+        <li>Download and save the optimized versions to the <code>src/assets/images/optimized/</code> folder</li>
+    </ol>
+    
+    <h3>Option 2: Using Desktop Software</h3>
+    <p>If you have access to image editing software like Photoshop, GIMP, or Paint.NET:</p>
+    <ol>
+        <li>Open the original image</li>
+        <li>Resize it to the required dimensions</li>
+        <li>Save it as a compressed JPG with quality around 80-85%</li>
+        <li>Place the files in the <code>src/assets/images/optimized/</code> folder</li>
+    </ol>
+    
+    <h3>Target File Sizes</h3>
+    <p>For optimal performance:</p>
+    <ul>
+        <li>author-small.jpg should be less than 30KB</li>
+        <li>author-medium.jpg should be less than 60KB</li>
+    </ul>
+    
+    <h2>Additional Tips</h2>
+    <ul>
+        <li>Consider using WebP format for even smaller file sizes (with JPG fallback for older browsers)</li>
+        <li>Make sure your images maintain good quality while being optimized</li>
+        <li>Test your site loading performance using tools like Google PageSpeed Insights</li>
+    </ul>
+</body>
+</html> 

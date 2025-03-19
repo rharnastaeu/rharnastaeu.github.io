@@ -69,9 +69,21 @@
                 </div>
             </div>
             <div class="hero-image">
-                <!-- Replace placeholder with actual profile image -->
+                <!-- Profile image with responsive sources -->
                 <div class="profile-image">
-                    <img src="src/assets/images/author.JPG" alt="Raman Harnastaeu">
+                    <picture>
+                        <!-- Small screens -->
+                        <source media="(max-width: 480px)" 
+                                srcset="src/assets/images/optimized/author-small.jpg">
+                        <!-- Medium screens -->
+                        <source media="(max-width: 768px)" 
+                                srcset="src/assets/images/optimized/author-medium.jpg">
+                        <!-- Default/large screens -->
+                        <img src="src/assets/images/author.JPG" 
+                             alt="Raman Harnastaeu"
+                             loading="lazy"
+                             fetchpriority="high">
+                    </picture>
                 </div>
             </div>
         </div>
