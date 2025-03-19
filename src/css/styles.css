@@ -108,22 +108,21 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Theme Switch Styles */
 .theme-switch-wrapper {
     display: flex;
     align-items: center;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .theme-switch {
-    display: inline-block;
     position: relative;
-    width: 60px;
-    height: 34px;
-    margin: 0 10px;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
 }
 
 .theme-switch input {
@@ -139,109 +138,112 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--bg-alt-color);
-    border: 1px solid var(--border-color);
-    transition: 0.4s;
-    border-radius: 34px;
+    background-color: #333;
+    transition: .3s;
+    border-radius: 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 5px;
+    padding: 0 4px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
+    height: 18px;
+    width: 18px;
+    left: 3px;
     bottom: 3px;
-    background-color: var(--primary-color);
-    transition: 0.4s;
+    background-color: white;
+    transition: .3s;
     border-radius: 50%;
     z-index: 2;
 }
 
-input:checked + .slider {
-    background-color: var(--bg-alt-color);
-}
-
-input:checked + .slider:before {
-    transform: translateX(26px);
-    background-color: var(--primary-color);
-}
-
-.slider .sun-icon,
-.slider .moon-icon {
-    color: var(--text-dark);
+.sun-icon, .moon-icon {
+    color: #fff;
     font-size: 14px;
     z-index: 1;
     transition: opacity 0.3s ease;
 }
 
-.slider .sun-icon {
-    margin-left: 6px;
-    opacity: 0.4;
+.sun-icon {
+    margin-left: auto;
 }
 
-.slider .moon-icon {
-    margin-right: 6px;
-    opacity: 1;
+.moon-icon {
+    margin-right: auto;
 }
 
-input:checked + .slider .sun-icon {
-    opacity: 1;
+input:checked + .slider {
+    background-color: #66a1ff;
 }
 
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Give immediate visual feedback on hover */
+.theme-switch:hover .slider {
+    box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Completely hide inactive icons instead of reducing opacity */
 input:checked + .slider .moon-icon {
-    opacity: 0.4;
+    opacity: 0;
+    visibility: hidden;
+}
+
+input:not(:checked) + .slider .sun-icon {
+    opacity: 0;
+    visibility: hidden;
 }
 
 /* Section styles */
 section {
     padding: 80px 0;
     min-height: 500px;
-    transition: background-color 0.5s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .about, .projects, .contact {
     background-color: var(--bg-color);
-    transition: background-color 0.5s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .experience, .skills {
     background-color: var(--bg-alt-color);
-    transition: background-color 0.5s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar {
     background-color: var(--navbar-bg);
-    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .project-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .timeline-content, .skill-category {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .timeline-item::after {
     background-color: var(--primary-color);
-    transition: background-color 0.5s ease;
+    transition: background-color 0.3s ease;
 }
 
 .footer {
     background-color: var(--bg-alt-color);
-    transition: background-color 0.5s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     padding: 40px 0 20px;
 }
 
@@ -265,12 +267,12 @@ section {
 
 .hero::before {
     background: linear-gradient(to right, var(--bg-color), rgba(0, 0, 0, 0.7));
-    transition: background 0.5s ease;
+    transition: background 0.3s ease;
 }
 
 body.light-theme .hero::before {
     background: linear-gradient(to right, var(--bg-color), rgba(255, 255, 255, 0.7));
-    transition: background 0.5s ease;
+    transition: background 0.3s ease;
 }
 
 /* Loading state styles */
@@ -592,11 +594,12 @@ ul {
 /* Hero section styles */
 .hero {
     position: relative;
-    height: 100vh;
-    min-height: 600px;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: var(--header-height); /* Add padding for the fixed header */
+    box-sizing: border-box;
 }
 
 .hero::before {
@@ -615,6 +618,20 @@ ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.hero-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+.hero-image {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero-title {
@@ -671,14 +688,9 @@ ul {
     gap: 20px;
 }
 
-.hero-image {
-    flex: 0 0 40%;
-    max-width: 400px;
-}
-
 .profile-image {
-    width: 300px;
-    height: 300px;
+    width: 325px;
+    height: 325px;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -712,38 +724,53 @@ ul {
 /* Add responsive sizing for profile image */
 @media screen and (max-width: 992px) {
     .profile-image {
-        width: 280px;
-        height: 280px;
+        width: 300px;
+        height: 300px;
     }
     
     .profile-image-placeholder {
-        width: 280px;
-        height: 280px;
+        width: 300px;
+        height: 300px;
     }
 }
 
 @media screen and (max-width: 768px) {
+    .hero .container {
+        justify-content: center;
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+    
+    .hero-image {
+        margin-bottom: 20px;
+    }
+    
     .profile-image {
-        width: 240px;
-        height: 240px;
+        margin: 0 auto;
+        width: 260px;    /* Increased from 240px */
+        height: 260px;   /* Increased from 240px */
     }
     
     .profile-image-placeholder {
-        width: 240px;
-        height: 240px;
+        width: 260px;
+        height: 260px;
+    }
+    
+    .hero {
+        padding-top: calc(var(--header-height) + 30px); /* More padding on mobile */
     }
 }
 
 @media screen and (max-width: 480px) {
     .profile-image {
-        width: 200px;
-        height: 200px;
+        width: 220px;
+        height: 220px;
         border-width: 3px;
     }
     
     .profile-image-placeholder {
-        width: 200px;
-        height: 200px;
+        width: 220px;
+        height: 220px;
     }
 }
 
@@ -1408,6 +1435,71 @@ ul {
 
 /* Mobile Devices */
 @media screen and (max-width: 768px) {
+    /* Consistent section padding */
+    section {
+        padding: 60px 0;
+    }
+    
+    /* Fix hero section alignment on mobile */
+    .hero {
+        text-align: center;
+        padding-top: calc(var(--header-height) + 30px); /* More padding on mobile */
+    }
+    
+    .hero-content {
+        width: 100%;
+        padding: 0 15px;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        height: 1.8rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Consistent container padding */
+    .container {
+        padding: 0 20px;
+    }
+    
+    /* Fix section titles */
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+    
+    /* Consistent card styles */
+    .project-card, .timeline-content, .skill-category {
+        margin-bottom: 20px;
+    }
+    
+    /* Fix mobile menu alignment */
+    .nav-menu {
+        gap: 0;
+    }
+    
+    .nav-item {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+    
+    /* Center contact items */
+    .contact-item {
+        justify-content: flex-start;
+    }
+    
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -1517,50 +1609,124 @@ ul {
         padding: 5px 10px;
         margin-bottom: 5px;
     }
+    
+    /* Skills section responsive fixes */
+    .skills-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px; /* Smaller gap on mobile */
+    }
+    
+    .skill-category {
+        padding: 20px; /* Smaller padding on mobile */
+    }
+    
+    .category-title {
+        font-size: 1.1rem; /* Smaller font size on mobile */
+        margin-bottom: 15px;
+    }
+    
+    .skill-info {
+        flex-wrap: wrap; /* Allow name and percentage to wrap */
+    }
+    
+    .skill-name {
+        font-size: 0.95rem;
+    }
+    
+    .skill-percentage {
+        font-size: 0.9rem;
+    }
+    
+    /* Center the theme switch in mobile menu */
+    .nav-menu .theme-switch-wrapper {
+        margin: 15px auto;
+        justify-content: center;
+        position: relative;
+        padding-top: 15px;
+    }
+    
+    /* Add a subtle divider above the theme switch */
+    .nav-menu .theme-switch-wrapper:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 1px;
+        background-color: var(--border-color);
+        opacity: 0.5;
+    }
+    
+    /* Make the switch slightly larger on mobile for better touch target */
+    .nav-menu .theme-switch {
+        width: 55px;
+        height: 28px;
+    }
+    
+    .nav-menu .slider:before {
+        height: 22px;
+        width: 22px;
+    }
+    
+    .nav-menu input:checked + .slider:before {
+        transform: translateX(27px);
+    }
+    
+    .nav-menu .sun-icon,
+    .nav-menu .moon-icon {
+        font-size: 16px;
+    }
 }
 
 /* Small Mobile Devices */
 @media screen and (max-width: 480px) {
+    /* Further adjust smallest screens */
+    section {
+        padding: 50px 0;
+    }
+    
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     .hero-subtitle {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
+        height: 1.6rem;
     }
     
-    .section-title {
-        font-size: 1.75rem;
+    /* Adjust footer for very small screens */
+    .footer-content {
+        text-align: center;
     }
     
-    .projects-grid {
-        grid-template-columns: 1fr;
+    .footer-social {
+        justify-content: center;
     }
     
+    /* Make buttons more tappable on mobile */
+    .btn, .filter-btn {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+    
+    /* Ensure timeline is fully visible */
     .timeline-item {
-        padding-right: 10px;
-        padding-left: 55px;
-    }
-    
-    .timeline-content {
-        padding: 18px 15px;
-    }
-    
-    .timeline-title {
-        font-size: 1.3rem;
-    }
-    
-    .timeline-company {
-        font-size: 1.1rem;
+        padding-left: 45px;
     }
     
     .timeline::after {
-        left: 25px;
+        left: 20px;
     }
     
     .timeline-item.left::after,
     .timeline-item.right::after {
-        left: 12px;
+        left: 8px;
+    }
+    
+    .skills-container {
+        grid-template-columns: 1fr; /* Single column on smallest screens */
     }
 }
 
@@ -1709,4 +1875,10 @@ ul {
 .no-hover-effect:hover .project-image img {
     filter: none !important;
     transform: none !important;
+}
+
+@media screen and (max-width: 480px) {
+    .projects-grid {
+        grid-template-columns: 1fr; /* Single column on smallest screens */
+    }
 } 

@@ -19,9 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
         initAnimation();
         console.log('Animation initialized');
         
-        // Initialize theme switching
-        initTheme();
+        // Initialize theme switching - using the consolidated function
+        initThemeSwitcher();
         console.log('Theme switching initialized');
+        
+        // Initialize image error handling
+        handleImageLoadErrors();
+        console.log('Image error handling initialized');
+        
+        // Initialize components
+        initComponents();
+        console.log('Components initialized');
+        
+        // Remove loading state
+        document.body.classList.remove('loading');
+        document.body.classList.add('loaded');
         
         // Initialize content sections with a slight delay to ensure DOM is ready
         setTimeout(() => {
@@ -95,61 +107,66 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Initializes theme switching functionality
+ * Initializes theme switching functionality - consolidated from both implementations
  */
-function initTheme() {
-    const themeToggle = document.getElementById('checkbox');
-    if (!themeToggle) {
+function initThemeSwitcher() {
+    const checkbox = document.getElementById('checkbox');
+    if (!checkbox) {
         console.error('Theme toggle checkbox not found');
         return;
     }
     
-    // Check for saved theme preference, default to dark
-    const storedTheme = localStorage.getItem('theme') || 'dark';
+    const body = document.body;
     
-    // Set initial theme
-    if (storedTheme === 'light') {
-        document.body.classList.add('light-theme');
-        themeToggle.checked = true;
+    // Use a single consistent localStorage key
+    const prefersDarkMode = localStorage.getItem('theme') !== 'light';
+    
+    // Set initial state
+    if (prefersDarkMode) {
+        // Dark mode (default)
+        body.classList.remove('light-theme');
+        checkbox.checked = false;
+    } else {
+        // Light mode
+        body.classList.add('light-theme');
+        checkbox.checked = true;
     }
     
-    // Handle theme toggle click
-    themeToggle.addEventListener('change', function() {
+    // Add event listener for theme toggle with debounce to prevent double-triggering
+    let isProcessing = false;
+    
+    checkbox.addEventListener('change', function() {
+        if (isProcessing) return;
+        isProcessing = true;
+        
+        console.log('Theme toggle clicked. New checked state:', this.checked);
+        
         if (this.checked) {
             // Switch to light theme
-            document.body.classList.add('light-theme');
+            body.classList.add('light-theme');
             localStorage.setItem('theme', 'light');
             console.log('Theme switched to light');
         } else {
             // Switch to dark theme
-            document.body.classList.remove('light-theme');
+            body.classList.remove('light-theme');
             localStorage.setItem('theme', 'dark');
             console.log('Theme switched to dark');
         }
         
-        // Add a subtle animation effect when changing themes
-        animateThemeChange();
+        // Reset processing flag after a short delay
+        setTimeout(() => {
+            isProcessing = false;
+        }, 300);
     });
 }
 
 /**
- * Adds subtle animation effect when changing themes
+ * Simplified animation effect for theme changes - removed entirely
+ * Let CSS transitions handle the color changes naturally
  */
-function animateThemeChange() {
-    const sections = document.querySelectorAll('section');
-    
-    // Subtle animation for each section
-    sections.forEach((section, index) => {
-        setTimeout(() => {
-            section.style.transition = 'transform 0.5s ease, background-color 0.5s ease';
-            section.style.transform = 'scale(0.98)';
-            
-            setTimeout(() => {
-                section.style.transform = 'scale(1)';
-            }, 200);
-        }, index * 100);
-    });
-}
+// function animateThemeChange() {
+//     // Animation removed as requested by user
+// }
 
 // Handle page loading
 window.addEventListener('load', () => {
@@ -174,27 +191,23 @@ window.addEventListener('load', () => {
 });
 
 /**
- * Image loading error handler
- * Falls back to the original image if optimized images aren't available
+ * Image loading error handler - simplified version
  */
 function handleImageLoadErrors() {
-    const imageSources = document.querySelectorAll('source[srcset]');
-    
-    imageSources.forEach(source => {
-        const img = new Image();
-        img.onerror = () => {
-            // If the optimized image fails to load, remove this source element
-            // so the browser falls back to the next available source or the img element
-            source.remove();
+    // Add loading error handler to profile image
+    const profileImg = document.querySelector('.profile-image img');
+    if (profileImg) {
+        profileImg.onerror = function() {
+            console.error('Error loading profile image');
+            // Could set a default fallback image here if needed
         };
-        img.src = source.srcset;
-    });
+    }
 }
 
 /**
  * Initialize all components
  */
-document.addEventListener('DOMContentLoaded', function() {
+function initComponents() {
     // Check if sections exist to prevent errors
     if (document.querySelector('.timeline')) {
         try {
@@ -230,15 +243,4 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle profile image optimization
     handleImageLoadErrors();
-    
-    // Theme switcher functionality
-    try {
-        initThemeSwitch();
-    } catch (error) {
-        console.error('Error initializing theme switcher:', error);
-    }
-    
-    // Mark document as fully loaded
-    document.body.classList.remove('loading');
-    document.body.classList.add('loaded');
-}); 
+} 
