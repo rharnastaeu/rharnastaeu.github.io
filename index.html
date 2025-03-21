@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Professional portfolio of Raman Harnastaeu - Software Developer, Blockchain & Web3 Specialist">
     <title>Raman Harnastaeu - Portfolio</title>
-    <!-- Favicon - inline base64 to avoid file not found error -->
+    <!-- Using base64 favicon to avoid file path issues on deployment -->
     <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjM1RUY4RjdGQkQzMjExRUQ5NjMwOTBCQTJCMEQ2MDk0IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjM1RUY4RjgwQkQzMjExRUQ5NjMwOTBCQTJCMEQ2MDk0Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MzVFRjhGN0RCRDMyMTFFRDk2MzA5MEJBMkIwRDYwOTQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MzVFRjhGN0VCRDMyMTFFRDk2MzA5MEJBMkIwRDYwOTQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz57wkC9AAAAyklEQVR42mL8//8/AyWAiYFCwEJIwX+G+ZlQngBQA/9/A+KTIEUY4J23g/8XmqsfgLgYSHr8D+cHACV+f/ifxHAa3RWMDGUQWx6IZP7/z8DAkN0fDbLlPQMDPAzghmNTjM0QmB5kA3mgBkFodAMUgXgD1AX/0QMRZnA/kG0BxSLIhqAbgvQMHzp7A1Qhugvo4CvUkP1IsQg34P9/Rqh/sYcBrhdHLKLEIjaALRbRDcGmOBotDHpJjESshn0l5JSsQD8epRgABBgA9C86Uf0ViH8AAAAASUVORK5CYII=">
-    <!-- Google Fonts -->
+    <!-- Imported fonts: using preconnect for faster page load -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&family=Fira+Code:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons (CDN) -->
+    <!-- FontAwesome icons - using CDN to avoid local dependency -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
+    <!-- My styles -->
     <link rel="stylesheet" href="src/css/styles.css">
-    <!-- Error Handling -->
+    <!-- Global error handler - helps catch JS errors early -->
     <script>
         window.addEventListener('error', function(event) {
             console.error('JS Error:', event.message, 'at', event.filename, 'line', event.lineno);
@@ -23,12 +23,17 @@
     </script>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navbar with mobile menu toggle and theme switch -->
     <header>
         <nav class="navbar">
             <div class="logo">
-                <a href="#home">who am I?</a>
+                <a href="#home" class="terminal-text">
+                    <span class="terminal-prompt">&gt;</span>
+                    <span class="glitch-text" data-text="who am I?">who am I?</span>
+                    <span class="terminal-cursor"></span>
+                </a>
             </div>
+            <!-- Hamburger menu for mobile -->
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -41,6 +46,7 @@
                 <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
                 <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                <!-- Dark/light theme toggle switch -->
                 <li class="nav-item">
                     <div class="theme-switch-wrapper">
                         <label class="theme-switch" for="checkbox">
@@ -56,11 +62,12 @@
         </nav>
     </header>
 
-    <!-- Hero/Intro Section -->
+    <!-- Hero section with typing animation and profile image -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">Hi, I'm <span class="highlight">Roman Harnastaeu</span></h1>
+                <!-- Subtitle gets filled by animation.js typing effect -->
                 <h2 class="hero-subtitle"></h2>
                 <p class="hero-description">A passionate developer with a strong background in DeFi and decentralized ecosystems, creating innovative solutions using blockchain technology.</p>
                 <div class="hero-cta">
@@ -69,7 +76,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <!-- Profile image -->
+                <!-- Profile image with lazy loading for better performance -->
                 <div class="profile-image">
                     <img src="src/assets/images/author.JPG" 
                          alt="Raman Harnastaeu"
@@ -79,10 +86,15 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About section with personal info -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title">
+                <div class="section-icon-container">
+                    <img src="src/assets/images/Card Index Dividers.webp" alt="About Me" class="section-icon once-animate" data-section="about">
+                </div>
+                About Me
+            </h2>
             <div class="about-content">
                 <div class="about-text">
                     <p>I'm a dedicated software developer specializing in blockchain technology and Web3 development. With experience in creating decentralized applications and smart contracts, I bring innovative solutions to the FinTech space.</p>
@@ -98,8 +110,8 @@
                         <span class="info-value">romananikeev21@gmail.com</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-title">Phone:</span>
-                        <span class="info-value">+1 (647) 641-1410</span>
+                        <span class="info-title">Location:</span>
+                        <span class="info-value">North York, Canada</span>
                     </div>
                     <div class="info-item">
                         <span class="info-title">Education:</span>
@@ -114,80 +126,124 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Work experience with timeline layout -->
     <section id="experience" class="experience">
         <div class="container">
-            <h2 class="section-title">Experience</h2>
+            <h2 class="section-title">
+                <div class="section-icon-container">
+                    <img src="src/assets/images/Pencil.webp" alt="Experience" class="section-icon once-animate" data-section="experience">
+                </div>
+                Experience
+            </h2>
             <div class="timeline">
-                <!-- Will be populated by JavaScript -->
+                <!-- Timeline gets populated by experience.js -->
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Project showcase with filterable portfolio -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">Projects</h2>
+            <h2 class="section-title">
+                <div class="section-icon-container">
+                    <img src="src/assets/images/Briefcase.webp" alt="Projects" class="section-icon once-animate" data-section="projects">
+                </div>
+                Projects
+            </h2>
             <div class="projects-filter">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="web">Web Development</button>
                 <button class="filter-btn" data-filter="blockchain">Blockchain</button>
             </div>
             <div class="projects-grid">
-                <!-- Will be populated by JavaScript -->
+                <!-- Grid gets populated by projects.js -->
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills with animated progress bars -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">Skills</h2>
+            <h2 class="section-title">
+                <div class="section-icon-container">
+                    <img src="src/assets/images/Graduation Cap.webp" alt="Skills" class="section-icon once-animate" data-section="skills">
+                </div>
+                Skills
+            </h2>
             <div class="skills-container">
-                <!-- Will be populated by JavaScript -->
+                <!-- Container gets populated by skills.js -->
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact info with social links -->
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">Contact Me</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
+                    <div class="contact-item" data-contact="email" data-value="romananikeev21@gmail.com">
+                        <div class="contact-icon">
+                            <img src="src/assets/images/Incoming Envelope.webp" alt="Email icon" class="contact-animation">
+                        </div>
                         <div class="contact-details">
                             <h3>Email</h3>
-                            <p>romananikeev21@gmail.com</p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
+                    <div class="contact-item" data-contact="phone" data-value="+1 (647) 641-1410">
+                        <div class="contact-icon">
+                            <img src="src/assets/images/Mobile Phone With Arrow.webp" alt="Phone icon" class="contact-animation">
+                        </div>
                         <div class="contact-details">
                             <h3>Phone</h3>
-                            <p>+1 (647) 641-1410</p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-item" data-contact="location" data-value="North York, Canada">
+                        <div class="contact-icon">
+                            <img src="src/assets/images/Luggage.webp" alt="Location icon" class="contact-animation">
+                        </div>
                         <div class="contact-details">
                             <h3>Location</h3>
-                            <p>North York, Canada</p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
+                    <div class="contact-item" data-contact="linkedin" data-value="https://www.linkedin.com/in/roman-harnastaeu-3433a634b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">
+                        <div class="contact-icon">
+                            <img src="src/assets/images/Identification Card.webp" alt="LinkedIn icon" class="contact-animation">
+                        </div>
                         <div class="contact-details">
                             <h3>LinkedIn</h3>
-                            <p><a href="https://www.linkedin.com/in/roman-harnastaeu-3433a634b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">linkedin.com/in/roman-harnastaeu</a></p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fab fa-github"></i>
+                    <div class="contact-item" data-contact="github" data-value="https://github.com/usert0n">
+                        <div class="contact-icon">
+                            <img src="src/assets/images/Laptop.webp" alt="GitHub icon" class="contact-animation">
+                        </div>
                         <div class="contact-details">
                             <h3>GitHub</h3>
-                            <p><a href="https://github.com/usert0n" target="_blank">github.com/usert0n</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Popup Modal -->
+                <div class="contact-popup" id="contactPopup">
+                    <div class="popup-content">
+                        <div class="popup-header">
+                            <h3 id="popupTitle">Contact Information</h3>
+                            <button class="close-popup">&times;</button>
+                        </div>
+                        <div class="popup-body">
+                            <p>What would you like to do?</p>
+                            <div class="popup-actions">
+                                <button id="btnCopy" class="popup-btn">Copy</button>
+                                <button id="btnOpen" class="popup-btn">Open</button>
+                            </div>
+                            <div class="copy-section">
+                                <pre id="copyValue" class="copy-value"></pre>
+                                <button id="btnCopyText" class="copy-btn">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div id="copyNotification" class="copy-notification">Copied!</div>
                         </div>
                     </div>
                 </div>
@@ -195,31 +251,43 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer with social links -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
                     <h3>Raman Harnastaeu</h3>
+                    <div class="footer-tagline">
+                        <img src="src/assets/images/Technologist.webp" alt="Technologist icon" class="footer-animation">
+                        <p>Full Stack Software Developer & Blockchain Specialist</p>
+                    </div>
                 </div>
                 <div class="footer-social">
-                    <a href="https://github.com/usert0n" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/roman-harnastaeu-3433a634b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/usert0n" class="social-link" target="_blank">
+                        <img src="src/assets/images/Laptop.webp" alt="GitHub" class="social-animation">
+                        <span class="social-label">GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/roman-harnastaeu-3433a634b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="social-link" target="_blank">
+                        <img src="src/assets/images/Identification Card.webp" alt="LinkedIn" class="social-animation">
+                        <span class="social-label">LinkedIn</span>
+                    </a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>Developed with enthusiasm.</p>
+                <p><img src="src/assets/images/Sparkles.webp" alt="Sparkles" class="sparkle-animation">NOTE: everything that you see here is my own work, meant to demonstrate my skills and abilities<img src="src/assets/images/Sparkles.webp" alt="Sparkles" class="sparkle-animation"></p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript Files -->
+    <!-- JS modules - using defer for performance -->
     <script src="src/js/navigation.js" defer></script>
     <script src="src/js/animation.js" defer></script>
     <script src="src/js/experience.js" defer></script>
     <script src="src/js/projects.js" defer></script>
     <script src="src/js/skills.js" defer></script>
     <script src="src/js/contact.js" defer></script>
+    <script src="src/js/animations.js" defer></script>
+    <script src="src/js/theme.js" defer></script>
     <script src="src/js/main.js" defer></script>
 </body>
 </html> 

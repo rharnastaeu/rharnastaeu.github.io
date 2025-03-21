@@ -3,14 +3,16 @@
  * Handles mobile menu toggle and smooth scrolling
  */
 
+// Navigation handler - manages mobile menu, smooth scrolling, and highlights active sections
+
 function initNavigation() {
-    // Get DOM elements
+    // Grab all the navigation elements we'll need
     const mobileMenuBtn = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     const navbar = document.querySelector('.navbar');
 
-    // Toggle mobile menu
+    // Toggle mobile menu open/closed when hamburger is clicked
     if (mobileMenuBtn) {
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenuBtn.classList.toggle('active');
@@ -18,7 +20,7 @@ function initNavigation() {
         });
     }
 
-    // Close mobile menu when clicking outside
+    // Close mobile menu when clicking outside of it (better UX)
     document.addEventListener('click', (e) => {
         if (
             navMenu && 
@@ -31,36 +33,37 @@ function initNavigation() {
         }
     });
 
-    // Handle navigation links click
+    // Handle clicks on nav links - smooth scroll + highlight active link
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Close mobile menu if open
+            // Close the mobile menu if it's open
             if (navMenu.classList.contains('active')) {
                 mobileMenuBtn.classList.remove('active');
                 navMenu.classList.remove('active');
             }
             
-            // Get the target section
+            // Find the section this link points to
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                // Smooth scroll to target
+                // Smooth scroll to the section, accounting for fixed navbar height
                 window.scrollTo({
                     top: targetSection.offsetTop - navbar.offsetHeight,
                     behavior: 'smooth'
                 });
                 
-                // Update active link
+                // Update which link is highlighted
                 navLinks.forEach(navLink => navLink.classList.remove('active'));
                 this.classList.add('active');
             }
         });
     });
 
-    // Change navbar shadow on scroll, but keep the theme-appropriate background
+    // Add shadow to navbar when scrolling down (subtle depth effect)
+    // Note: Only change shadow, not background color (to preserve theme)
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             // Only adjust the box shadow, not the background color
@@ -69,14 +72,12 @@ function initNavigation() {
             navbar.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.05)';
         }
         
-        // Update active link based on scroll position
+        // Highlight the nav link for section currently in viewport
         updateActiveNavOnScroll();
     });
 }
 
-/**
- * Updates the active navigation link based on scroll position
- */
+// Detects which section is currently visible and highlights the matching nav link
 function updateActiveNavOnScroll() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -88,11 +89,13 @@ function updateActiveNavOnScroll() {
         const sectionHeight = section.clientHeight;
         const navbarHeight = document.querySelector('.navbar').offsetHeight;
         
+        // Check if we've scrolled to this section (with some buffer space)
         if (window.scrollY >= (sectionTop - navbarHeight - 100)) {
             currentSection = section.getAttribute('id');
         }
     });
     
+    // Highlight the link that matches the current section
     navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${currentSection}`) {

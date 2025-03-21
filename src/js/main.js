@@ -3,44 +3,47 @@
  * Handles initialization of all components
  */
 
-// Wait for the DOM to be fully loaded
+// Main entry point for portfolio site
+// Controls initialization sequence and handles errors
+
+// Start everything once DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Portfolio website initialized');
     
-    // Add loading state to the body
+    // Show loading state while components initialize
     document.body.classList.add('loading');
     
     try {
         console.log('Starting navigation initialization');
-        // Initialize all components
+        // Set up core components first
         initNavigation();
         console.log('Navigation initialized');
         
         initAnimation();
         console.log('Animation initialized');
         
-        // Initialize theme switching - using the consolidated function
+        // Set up theme switcher (dark/light mode)
         initThemeSwitcher();
         console.log('Theme switching initialized');
         
-        // Initialize image error handling
+        // Handle potential image load failures
         handleImageLoadErrors();
         console.log('Image error handling initialized');
         
-        // Initialize components
+        // Initialize all section components
         initComponents();
         console.log('Components initialized');
         
-        // Remove loading state
+        // Show the page now that essential components are ready
         document.body.classList.remove('loading');
         document.body.classList.add('loaded');
         
-        // Initialize content sections with a slight delay to ensure DOM is ready
+        // Use slight delay for content-heavy sections to prevent layout shifts
         setTimeout(() => {
             console.log('Starting content initialization after delay');
             
             try {
-                // Find all section containers to ensure they exist
+                // Make sure section containers exist before trying to fill them
                 const experienceContainer = document.querySelector('#experience .timeline');
                 const projectsContainer = document.querySelector('#projects .projects-grid');
                 const skillsContainer = document.querySelector('#skills .skills-container');
@@ -67,13 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 initContact();
                 console.log('Contact section initialized');
                 
-                // Double check containers after initialization
+                // Double check for empty containers - fixes occasional render issues
                 console.log('Post-init container check:', 
                     'Projects grid has', document.querySelectorAll('.projects-grid .project-card').length, 'project cards',
                     'Skills container has', document.querySelectorAll('.skills-container .skill-category').length, 'skill categories'
                 );
                 
-                // Force reflow of containers to ensure visibility
+                // Force reinit if needed - sometimes content doesn't render on first try
                 if (projectsContainer && !projectsContainer.children.length) {
                     console.log('Force reinitializing projects');
                     initProjects();
@@ -84,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     initSkills();
                 }
                 
-                // Remove loading state
+                // Make sure we're fully loaded
                 document.body.classList.remove('loading');
                 document.body.classList.add('loaded');
                 
@@ -92,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 console.error('Error in delayed initialization:', error);
                 document.body.classList.remove('loading');
-                // Add error message to page
+                // Show user-friendly error instead of blank sections
                 const errorMessage = document.createElement('div');
                 errorMessage.className = 'error-message';
                 errorMessage.innerHTML = `<p>There was an error loading the portfolio content: ${error.message}</p>`;
@@ -118,10 +121,10 @@ function initThemeSwitcher() {
     
     const body = document.body;
     
-    // Use a single consistent localStorage key
+    // Check if user previously set a theme preference
     const prefersDarkMode = localStorage.getItem('theme') !== 'light';
     
-    // Set initial state
+    // Apply the right theme on page load
     if (prefersDarkMode) {
         // Dark mode (default)
         body.classList.remove('light-theme');
@@ -132,7 +135,7 @@ function initThemeSwitcher() {
         checkbox.checked = true;
     }
     
-    // Add event listener for theme toggle with debounce to prevent double-triggering
+    // Stop rapid double-clicks from breaking the theme state
     let isProcessing = false;
     
     checkbox.addEventListener('change', function() {
@@ -153,7 +156,7 @@ function initThemeSwitcher() {
             console.log('Theme switched to dark');
         }
         
-        // Reset processing flag after a short delay
+        // Reset the processing lock after a small delay
         setTimeout(() => {
             isProcessing = false;
         }, 300);
@@ -168,16 +171,16 @@ function initThemeSwitcher() {
 //     // Animation removed as requested by user
 // }
 
-// Handle page loading
+// Make sure content looks right when all resources finish loading
 window.addEventListener('load', () => {
     console.log('Window fully loaded with all resources');
-    // Make sure sections are properly refreshed after all resources are loaded
+    // Force repaint key sections to fix occasional render glitches
     const sections = ['experience', 'projects', 'skills'];
     sections.forEach(section => {
         const container = document.querySelector(`#${section} .container`);
         if (container) {
             console.log(`Refreshing ${section} section`);
-            // Force a reflow/repaint
+            // Opacity trick forces a repaint without visible flicker
             container.style.opacity = 0.99;
             setTimeout(() => {
                 container.style.opacity = 1;
@@ -199,7 +202,7 @@ function handleImageLoadErrors() {
     if (profileImg) {
         profileImg.onerror = function() {
             console.error('Error loading profile image');
-            // Could set a default fallback image here if needed
+            // Could add a fallback image here in the future
         };
     }
 }
@@ -208,7 +211,7 @@ function handleImageLoadErrors() {
  * Initialize all components
  */
 function initComponents() {
-    // Check if sections exist to prevent errors
+    // Only initialize sections that exist in the DOM
     if (document.querySelector('.timeline')) {
         try {
             initExperience();
@@ -241,6 +244,6 @@ function initComponents() {
         }
     }
     
-    // Handle profile image optimization
+    // Set up image error handling for profile pic
     handleImageLoadErrors();
 } 

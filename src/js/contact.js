@@ -194,4 +194,135 @@ function showFormMessage(type, message) {
             messageElement.remove();
         }, 5000);
     }
-} 
+}
+
+/**
+ * Contact Section Popup Functionality
+ * Handles interactivity for contact section, including popup displays
+ * and clipboard operations
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get DOM elements
+    const contactItems = document.querySelectorAll('.contact-item');
+    const contactPopup = document.getElementById('contactPopup');
+    const popupTitle = document.getElementById('popupTitle');
+    const closePopupBtn = document.querySelector('.close-popup');
+    const btnCopy = document.getElementById('btnCopy');
+    const btnOpen = document.getElementById('btnOpen');
+    const copySection = document.querySelector('.copy-section');
+    const copyValue = document.getElementById('copyValue');
+    const btnCopyText = document.getElementById('btnCopyText');
+    const copyNotification = document.getElementById('copyNotification');
+    
+    // Current contact data
+    let currentContact = {
+        type: '',
+        value: ''
+    };
+    
+    // Add click event listeners to contact items
+    contactItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Get contact data from data attributes
+            const contactType = this.getAttribute('data-contact');
+            const contactValue = this.getAttribute('data-value');
+            
+            // Set current contact data
+            currentContact.type = contactType;
+            currentContact.value = contactValue;
+            
+            // Set popup title based on contact type
+            let title = '';
+            switch(contactType) {
+                case 'email':
+                    title = 'Email Address';
+                    break;
+                case 'phone':
+                    title = 'Phone Number';
+                    break;
+                case 'location':
+                    title = 'Location';
+                    break;
+                case 'linkedin':
+                    title = 'LinkedIn Profile';
+                    break;
+                case 'github':
+                    title = 'GitHub Profile';
+                    break;
+                default:
+                    title = 'Contact Information';
+            }
+            
+            popupTitle.textContent = title;
+            
+            // Reset popup state
+            copySection.classList.remove('show');
+            copyNotification.classList.remove('show');
+            
+            // Show popup
+            contactPopup.classList.add('show');
+        });
+    });
+    
+    // Close popup when clicking the close button
+    closePopupBtn.addEventListener('click', function() {
+        contactPopup.classList.remove('show');
+    });
+    
+    // Close popup when clicking outside the popup content
+    contactPopup.addEventListener('click', function(event) {
+        if (event.target === contactPopup) {
+            contactPopup.classList.remove('show');
+        }
+    });
+    
+    // Copy button click event
+    btnCopy.addEventListener('click', function() {
+        // Display the copy section
+        copySection.classList.add('show');
+        copyValue.textContent = currentContact.value;
+    });
+    
+    // Open button click event
+    btnOpen.addEventListener('click', function() {
+        // Handle different contact types differently
+        switch(currentContact.type) {
+            case 'email':
+                window.location.href = `mailto:${currentContact.value}`;
+                break;
+            case 'phone':
+                window.location.href = `tel:${currentContact.value}`;
+                break;
+            case 'location':
+                window.open(`https://maps.google.com?q=${encodeURIComponent(currentContact.value)}`, '_blank');
+                break;
+            case 'linkedin':
+            case 'github':
+                window.open(currentContact.value, '_blank');
+                break;
+        }
+        
+        // Close the popup
+        contactPopup.classList.remove('show');
+    });
+    
+    // Copy text button click event
+    btnCopyText.addEventListener('click', function() {
+        // Copy text to clipboard
+        navigator.clipboard.writeText(currentContact.value)
+            .then(() => {
+                // Show success notification
+                copyNotification.classList.add('show');
+                
+                // Hide notification after animation completes
+                setTimeout(() => {
+                    copyNotification.classList.remove('show');
+                }, 3000);
+            })
+            .catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy to clipboard. Please try again.');
+            });
+    });
+}); 
