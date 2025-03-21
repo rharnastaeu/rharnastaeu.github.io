@@ -1,6 +1,6 @@
 # Portfolio Website - Technical Documentation & Developer Guide
 
-Welcome to my personal portfolio website documentation. This project is built entirely from scratch using vanilla JavaScript, HTML5, and CSS3 – no frameworks, no shortcuts. Every line of code is handcrafted to showcase my skills and attention to detail. Below is the complete documentation and developer guide in one markdown block for easy copy-paste.
+Welcome to my personal portfolio website documentation. This project is built entirely from scratch using vanilla JavaScript, HTML5, and CSS3 – no frameworks, no shortcuts. Every line of code is handcrafted to showcase my skills and attention to detail.
 
 ---
 
