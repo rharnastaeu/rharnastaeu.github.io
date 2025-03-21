@@ -1,33 +1,38 @@
-# Portfolio Website - Technical Documentation
+# Portfolio Website - Technical Documentation & Developer Guide
+
+Welcome to my personal portfolio website documentation. This project is built entirely from scratch using vanilla JavaScript, HTML5, and CSS3 – no frameworks, no shortcuts. Every line of code is handcrafted to showcase my skills and attention to detail. Below is the complete documentation and developer guide in one markdown block for easy copy-paste.
+
+---
 
 ## Overview
-This repository contains my personal portfolio website built from scratch with vanilla JavaScript, HTML5, and CSS3. No frameworks were used - everything is custom coded to showcase my true programming abilities and attention to detail.
+
+This site demonstrates advanced frontend techniques:
+- **Responsive Design:** A device-agnostic layout built with CSS Grid and Flexbox ensuring pixel-perfect views on mobile, tablet, and desktop.
+- **Custom Theme System:** Dark/light themes implemented using CSS variables, with preferences stored in localStorage and smooth hardware-accelerated transitions.
+- **WebP Animations:** Custom WebP animations for key sections (Card Index, Pencil, Briefcase, Graduation Cap) controlled by the Intersection Observer API so they play only once.
+- **Interactive Contact System:** A custom popup for contact details that leverages the Clipboard API for effortless copying.
+- **Terminal-Inspired UI:** A unique typing animation with variable speed, glitch effects, and retro monospace styling.
+- **Optimized Performance:** Modular JavaScript, lazy-loaded assets, inlined critical CSS, and robust error handling.
+
+---
 
 ## Technical Stack & Implementation
 
 ### Core Technologies
-- **HTML5**: Semantic markup structure
-- **CSS3**: Custom properties, flexbox, grid, animations
-- **Vanilla JavaScript**: DOM manipulation, async functionality, intersection observers
+- **HTML5:** Semantic, accessible markup.
+- **CSS3:** Custom properties, Flexbox, Grid, and animations.
+- **Vanilla JavaScript:** Native DOM manipulation, async patterns, and modern APIs like Intersection Observer.
 
-### Key Features & Implementation Details
+### Key Features
 
-#### Responsive Design Architecture
-- Built with a device-agnostic approach using CSS Grid and Flexbox.
-- The site maintains pixel-perfect layouts across all breakpoints (mobile, tablet, desktop) through a carefully designed responsive system that adapts content containers rather than relying on fixed media queries.
+**Responsive Design Architecture:**  
+Utilizes CSS Grid and Flexbox to create a fluid, adaptive layout. The design adapts gracefully to different breakpoints without fixed media queries.
 
-#### Theme System
-- Implemented a custom dark/light theme system using CSS variables and DOM manipulation:
-  - CSS variables store theme colors for instant application.
-  - Theme preference persists using localStorage.
-  - Hardware-acceleration enabled transitions prevent layout shifts.
-  - System preference detection via `prefers-color-scheme`.
+**Theme System:**  
+A custom dark/light theme is implemented using CSS variables. User preferences persist via localStorage, and hardware-accelerated transitions ensure smooth theme changes. The site also detects system preferences using `prefers-color-scheme`.
 
-#### WebP Animation Integration
-- Custom WebP animations added for each section (Card Index, Pencil, Briefcase, Graduation Cap).
-- Intersection Observer API controls animation playback to ensure animations trigger once.
-- Animation timing optimized to prevent performance impacts.
-- Implemented programmatic animation control with `animation-iteration-count`:
+**WebP Animation Integration:**  
+Custom WebP animations are incorporated into key sections. The Intersection Observer API ensures animations trigger only once, and `animation-iteration-count` is used programmatically to optimize performance.
 
 ```javascript
 // Animation control using Intersection Observer API
@@ -35,14 +40,12 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
             entry.target.classList.add('animated');
-            
             const webpImage = entry.target.querySelector('img');
             if (webpImage) {
                 webpImage.addEventListener('load', () => {
                     webpImage.style.animationIterationCount = '1';
                 });
             }
-            
             observer.unobserve(entry.target);
         }
     });
@@ -52,115 +55,51 @@ const observer = new IntersectionObserver((entries) => {
 });
 ```
 
-#### Interactive Contact System
-- Custom-built popup system for contact information.
-- Implements the Clipboard API for seamless contact info copying.
-- Modal system built from scratch with proper focus management.
-- Handler pattern for various contact types (email, phone, links).
+**Interactive Contact System:**  
+A custom-built popup displays contact details and uses the Clipboard API for seamless copying. The modal is built from scratch with proper focus management and supports various contact types (email, phone, links).
 
-#### Terminal-Inspired UI Elements
-- Custom typing animation with variable speed and cursor effects.
-- Terminal-inspired text styling with monospace fonts.
-- Glitch effects for visual engagement using CSS pseudo-elements.
+**Terminal-Inspired UI Elements:**  
+Features a custom typing animation with variable speed and a blinking cursor. The design employs a retro monospace style enhanced with subtle glitch effects.
 
-#### Code Organization
-- Modular JavaScript with separate files for distinct functionality.
-- Event delegation pattern for optimal performance.
-- CSS structured with logical component grouping.
-- Lazy-loading implementation for image assets.
+**Code Organization & Performance Optimizations:**  
+The code is modularized across multiple JavaScript files with event delegation and lazy-loaded assets. Performance is further enhanced by deferring JS loading, inlining critical CSS, custom font strategies, and throttling animations. The site is tested across modern browsers including Chrome, Firefox, Safari, Edge, and mobile browsers.
 
-#### Performance Optimizations
-- Deferred JavaScript loading with async pattern.
-- Critical CSS inlined for immediate rendering.
-- WebP image format with lazy loading.
-- Custom font loading strategy with fallbacks.
-- Animation throttling for performance.
-
-#### Browser Compatibility
-Tested and optimized for:
-- Chrome 80+
-- Firefox 75+
-- Safari 13+
-- Edge (Chromium-based)
-- Mobile Safari and Chrome for Android
-
-#### Future Development Roadmap
-- Server-side rendering option for improved first load.
-- Progressive Web App capabilities.
-- Automated build process with asset optimization.
+**Future Roadmap:**  
+- Implement server-side rendering for faster initial loads.
+- Add Progressive Web App (PWA) capabilities.
+- Automate the build process with asset optimization.
 
 ---
 
-This project serves as a demonstration of my ability to build clean, efficient, accessible, and performant web applications without relying on UI frameworks. Every animation, interaction, and visual element is custom-coded to demonstrate my core frontend development skills.
+## Developer Guide
 
-# Developer Guide for Portfolio Website
+This section explains the inner workings of each module.
 
-This guide provides a comprehensive overview of the portfolio website's codebase. It explains the logic and methods used across the various modules, complete with code excerpts and detailed commentary. The website is built from scratch using vanilla JavaScript, HTML5, and CSS3—with no external frameworks—to demonstrate advanced frontend techniques in responsive design, custom animations, interactive components, and robust error handling.
-
----
-
-## Table of Contents
-1. [Introduction & Overview](#introduction--overview)
-2. [File Structure & Modules](#file-structure--modules)
-3. [Module Guides](#module-guides)
-   - [Contact Module (`contact.js`)](#contact-module-contactjs)
-   - [Animation Module (`animation.js`)](#animation-module-animationjs)
-   - [Section Icons Animation Module (`animations.js`)](#section-icons-animation-module-animationsjs)
-   - [Navigation Module (`navigation.js`)](#navigation-module-navigationjs)
-   - [Experience Module (`experience.js`)](#experience-module-experiencejs)
-   - [Main Module (`main.js`)](#main-module-mainjs)
-4. [Conclusion & Final Notes](#conclusion--final-notes)
+### Table of Contents
+1. [Contact Module (`contact.js`)](#contact-module-contactjs)
+2. [Animation Module (`animation.js`)](#animation-module-animationjs)
+3. [Section Icons Animation Module (`animations.js`)](#section-icons-animation-module-animationsjs)
+4. [Navigation Module (`navigation.js`)](#navigation-module-navigationjs)
+5. [Experience Module (`experience.js`)](#experience-module-experiencejs)
+6. [Main Module (`main.js`)](#main-module-mainjs)
+7. [Conclusion & Final Notes](#conclusion--final-notes)
 
 ---
-
-## Introduction & Overview
-
-This portfolio website is crafted entirely with **HTML5**, **CSS3**, and **Vanilla JavaScript**. Every element—from animations to theme switching—is custom-built to ensure maximum performance, accessibility, and a pixel-perfect design across all devices. The project is split into distinct modules, each responsible for a set of functionalities, allowing for clear organization and maintainability.
-
----
-
-## File Structure & Modules
-
-- **contact.js:** Manages the contact form, input validation, form submission, and interactive popups including clipboard operations.
-- **animation.js:** Handles scroll-triggered animations and an advanced typing effect for the hero subtitle.
-- **animations.js:** Deals with one-time animations for section icons using the Intersection Observer API.
-- **navigation.js:** Implements mobile navigation, smooth scrolling, and active link highlighting.
-- **experience.js:** Renders an interactive timeline of work experiences with expandable details.
-- **main.js:** Acts as the central initializer, orchestrating the startup sequence, theme switching, and error handling.
-
----
-
-## Module Guides
 
 ### Contact Module (`contact.js`)
 
 **Purpose:**  
-Handles contact form validation and submission. Also manages interactive contact popups and clipboard copying for contact details.
+Handles contact form validation and submission, and manages interactive popups and clipboard operations.
 
-**Key Functions & Logic:**
-
-- **`initContact()`**
-  - Selects the contact form by its ID.
-  - Attaches event listeners for form submission and input events (blur and input) to validate fields and clear errors.
-  
-- **`handleFormSubmit(e)`**
-  - Prevents the default form submission.
-  - Retrieves form input elements (name, email, subject, message).
-  - Validates each field using the `validateInput()` function.
-  - If all fields are valid, simulates a form submission (logs data and shows a success message) and resets the form.
-  
-- **`validateInput(e)`**
-  - Checks the input based on its type (e.g., ensuring the name is at least 2 characters, a valid email format, etc.).
-  - Adds an error class and creates an error message element if validation fails.
-  
-- **`showFormMessage(type, message)`**
-  - Dynamically creates a message element with an icon (success or error) and displays it above the form.
-  - Automatically removes success messages after 5 seconds.
-
-- **Popup & Clipboard Functionality:**
-  - Listens for clicks on elements with the `.contact-item` class.
-  - Displays a popup with the corresponding contact information.
-  - Provides buttons to either copy the contact info (using the Clipboard API) or open the corresponding app (email, phone, maps).
+**Key Functions:**
+- **initContact():**  
+  Grabs the contact form by ID and attaches event listeners for submission and input validation.
+- **handleFormSubmit(e):**  
+  Prevents default submission, validates inputs (name, email, subject, message), logs the data, shows a success message, and resets the form.
+- **validateInput(e):**  
+  Validates input fields (e.g., minimum length for names, valid email format) and displays error messages.
+- **showFormMessage(type, message):**  
+  Dynamically creates and displays a message (with an icon) above the form; success messages auto-remove after 5 seconds.
 
 **Code Excerpt:**
 ```javascript
@@ -216,25 +155,17 @@ function handleFormSubmit(e) {
 ### Animation Module (`animation.js`)
 
 **Purpose:**  
-Manages animations that trigger when elements scroll into view and implements an advanced typing effect for dynamic text in the hero section.
+Handles scroll-triggered animations and a dynamic typing effect for the hero subtitle.
 
-**Key Functions & Logic:**
-
-- **`initAnimation()`**
-  - Selects elements with the `.animate-on-scroll` class and triggers their animations via `observeElements()`.
-  - Forces animations on specific elements (like project cards) after a short delay.
-  - Initiates the typing animation for the hero subtitle.
-  
-- **`initTypingAnimation()`**
-  - Cycles through an array of professional titles using a natural typing effect.
-  - Alternates between typing and deleting characters, using dynamic timing to simulate realistic typing.
-
-- **`observeElements(elements)`**
-  - Uses the Intersection Observer API to monitor when elements come into the viewport.
-  - Once an element is visible, the function adds an `animated` class to trigger CSS animations and then stops observing the element.
-
-- **`addAnimationClasses()`**
-  - Automatically assigns specific animation classes (like fade-in effects) to various page sections upon DOM content load.
+**Key Functions:**
+- **initAnimation():**  
+  Observes elements with the `.animate-on-scroll` class to trigger animations, forces animation on specific elements after a delay, and starts the typing animation.
+- **initTypingAnimation():**  
+  Cycles through an array of professional titles with a realistic typing and deleting effect.
+- **observeElements(elements):**  
+  Uses the Intersection Observer API to trigger animations when elements enter the viewport.
+- **addAnimationClasses():**  
+  Automatically assigns animation classes to key sections when the DOM is ready.
 
 **Code Excerpt:**
 ```javascript
@@ -299,14 +230,13 @@ function initTypingAnimation() {
 ### Section Icons Animation Module (`animations.js`)
 
 **Purpose:**  
-Controls animations for section icons that should play only once when they first appear in the viewport.
+Controls one-time animations for section icons as they first appear in the viewport.
 
 **Key Logic:**
-
 - Sets up an Intersection Observer to detect elements with the `.once-animate` class.
-- Once an element is 20% visible and not yet animated, it adds the `animated` class.
-- For any contained WebP images, it sets `animation-iteration-count` to 1 upon image load.
-- Provides a fallback for browsers that do not support Intersection Observer.
+- Adds the `animated` class when an element is 20% visible.
+- For WebP images within these elements, sets `animation-iteration-count` to 1 after loading.
+- Provides a fallback for browsers without Intersection Observer support.
 
 **Code Excerpt:**
 ```javascript
@@ -347,18 +277,13 @@ document.addEventListener('DOMContentLoaded', () => {
 ### Navigation Module (`navigation.js`)
 
 **Purpose:**  
-Manages the website's navigation by handling mobile menu toggling, smooth scrolling between sections, and dynamically highlighting the active navigation link.
+Manages mobile menu toggling, smooth scrolling between sections, and dynamic highlighting of the active navigation link.
 
-**Key Functions & Logic:**
-
-- **`initNavigation()`**
-  - Toggles the mobile menu when the hamburger button is clicked.
-  - Adds a global click listener to close the menu when clicking outside.
-  - Handles smooth scrolling when a navigation link is clicked and adjusts for the fixed navbar height.
-  
-- **`updateActiveNavOnScroll()`**
-  - Monitors the scroll position to determine which section is in view.
-  - Highlights the corresponding navigation link accordingly.
+**Key Functions:**
+- **initNavigation():**  
+  Toggles the mobile menu on hamburger click, closes it when clicking outside, and enables smooth scrolling (adjusted for the fixed navbar).
+- **updateActiveNavOnScroll():**  
+  Monitors the scroll position to identify the current section and highlights the corresponding nav link.
 
 **Code Excerpt:**
 ```javascript
@@ -419,7 +344,6 @@ function updateActiveNavOnScroll() {
     let currentSection = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
         const navbarHeight = document.querySelector('.navbar').offsetHeight;
         if (window.scrollY >= (sectionTop - navbarHeight - 100)) {
             currentSection = section.getAttribute('id');
@@ -439,21 +363,15 @@ function updateActiveNavOnScroll() {
 ### Experience Module (`experience.js`)
 
 **Purpose:**  
-Renders an interactive timeline for work experience and adds interactivity for expanding or collapsing detailed information.
+Renders an interactive timeline of work experience with expandable details.
 
-**Key Functions & Logic:**
-
-- **`initExperience()`**
-  - Checks if a timeline container exists.
-  - Loads an array of experience objects (each with title, company, period, description, responsibilities, and technologies).
-  - Calls `renderExperienceTimeline()` to build the timeline in the DOM.
-  
-- **`renderExperienceTimeline(experiences, container)`**
-  - Iterates over the experience data.
-  - Dynamically creates timeline items with alternating alignment (left/right) and embeds details.
-  
-- **`addTimelineInteractivity()`**
-  - Adds click event listeners to toggle the display of additional details (responsibilities, technologies) within each timeline item.
+**Key Functions:**
+- **initExperience():**  
+  Checks for a timeline container, loads experience objects, and calls renderExperienceTimeline().
+- **renderExperienceTimeline(experiences, container):**  
+  Iterates over the experience data and dynamically creates timeline items with alternating alignment.
+- **addTimelineInteractivity():**  
+  Adds click listeners to toggle the display of additional details (responsibilities, technologies).
 
 **Code Excerpt:**
 ```javascript
@@ -546,28 +464,17 @@ function addTimelineInteractivity() {
 ### Main Module (`main.js`)
 
 **Purpose:**  
-Acts as the central orchestrator for the website. It initializes all modules, manages theme switching, handles error detection, and ensures smooth loading and user feedback.
+Acts as the central initializer, coordinating the startup sequence, theme switching, error handling, and ensuring smooth page loading.
 
-**Key Functions & Logic:**
-
-- **Initialization Sequence:**
-  - Listens for the `DOMContentLoaded` event to begin initialization.
-  - Applies a loading state to the page until essential components are ready.
-  - Initializes core modules: navigation, animations, theme switching, and image error handling.
-  
-- **Delayed Initialization:**
-  - Uses a short timeout to initialize heavier sections (experience, projects, skills) after the initial load to avoid layout shifts.
-  
-- **Theme Switching (`initThemeSwitcher()`):**
-  - Reads the user's theme preference from `localStorage` and applies the appropriate theme.
-  - Uses a processing lock to prevent rapid toggling errors.
-  
-- **Error Handling:**
-  - Wraps module initialization in try-catch blocks to capture and log errors.
-  - Displays a user-friendly error message if a module fails to initialize.
-  
-- **Image Load Error Handling:**
-  - Implements a simple fallback to catch and log errors when a profile image fails to load.
+**Key Functions:**
+- **Initialization Sequence:**  
+  On `DOMContentLoaded`, sets a loading state, initializes core modules (navigation, animations, theme switching, image error handling), then removes the loading state.
+- **Delayed Initialization:**  
+  Uses a timeout to initialize heavier sections (experience, projects, skills) after the initial load.
+- **initThemeSwitcher():**  
+  Reads the user’s theme preference from localStorage and applies the correct theme while preventing rapid toggling.
+- **Error Handling & Image Load Fallback:**  
+  Wraps module initialization in try-catch blocks and implements a fallback for profile image errors.
 
 **Code Excerpt:**
 ```javascript
@@ -677,14 +584,6 @@ function initComponents() {
 
 ## Conclusion & Final Notes
 
-This comprehensive guide has walked you through the architecture and logic of the portfolio website. Each module is designed to be self-contained yet works together seamlessly to provide a smooth, responsive, and engaging user experience. Key takeaways include:
-
-- **Modular Architecture:** Each JavaScript file handles specific features, making the code maintainable and scalable.
-- **Responsive & Adaptive Design:** Advanced CSS techniques and JavaScript event handling ensure the site looks great on all devices.
-- **Dynamic Interactions:** From smooth scrolling navigation to one-time animations and an advanced typing effect, the site leverages modern web APIs for a dynamic user interface.
-- **Robust Error Handling:** Multiple layers of error checking and fallback mechanisms ensure a resilient application.
-
-Developers can use this guide as a reference for extending or modifying the codebase. Every module is fully commented within the source files to aid understanding and further customization.
+This guide walks through every part of my portfolio website – from responsive design and theme switching to custom animations and interactive features. Each module is self-contained yet integrates seamlessly to deliver a clean, efficient, and engaging web experience. Use this guide as a reference for extending or modifying the codebase.
 
 *Happy coding!*
-
